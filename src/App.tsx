@@ -1,8 +1,10 @@
+import MyMap from "./MyMap"
+
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <MyMap areaId={11111} />
     </>
   )
 }
