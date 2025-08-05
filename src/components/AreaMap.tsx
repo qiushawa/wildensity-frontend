@@ -54,7 +54,10 @@ const AreaMap: React.FC = () => {
 									radius={5}
 									pathOptions={{ fillOpacity: 0.8, color: 'blue', fillColor: 'blue' }}
 								>
-									<Popup>{device.device_name} ({device.status})</Popup>
+									<Popup>{device.device_name} ({device.status.toLowerCase()})
+										<br/>
+										{device.location_description || '無位置描述'}
+									</Popup>
 								</CircleMarker>
 							))}
 
