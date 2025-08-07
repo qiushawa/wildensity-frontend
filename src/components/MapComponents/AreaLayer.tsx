@@ -1,11 +1,5 @@
 import { Polygon, Popup } from 'react-leaflet';
-
-type LatLngTuple = [number, number];
-
-interface PolygonLayerProps {
-  positions: LatLngTuple[];
-  popupContent?: string;
-}
+import type { PolygonLayerProps } from '../../types';
 
 const AreaLayer: React.FC<PolygonLayerProps> = ({ positions, popupContent }) => {
   return (
