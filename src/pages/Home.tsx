@@ -1,4 +1,4 @@
-import AreaMap from '../components/AreaMap';
+import AreaMap from '../components/MapComponents/AreaMap';
 
 const Home: React.FC = () => {
   return (

@@ -7,14 +7,14 @@ interface PolygonLayerProps {
   popupContent?: string;
 }
 
-const PolygonLayer: React.FC<PolygonLayerProps> = ({ positions, popupContent }) => {
+const AreaLayer: React.FC<PolygonLayerProps> = ({ positions, popupContent }) => {
   return (
     <Polygon
       positions={positions}
       pathOptions={{
-        color: 'green',
+        color: '#3388ff',
         weight: 3,
-        fillColor: 'green',
+        fillColor: '#3388ff',
         fillOpacity: 0.3,
       }}
     >
@@ -23,4 +23,4 @@ const PolygonLayer: React.FC<PolygonLayerProps> = ({ positions, popupContent }) 
   );
 };
 
-export default PolygonLayer;
+export default AreaLayer;
