@@ -23,3 +23,8 @@ export interface Device {
   location_description?: string;
   status: string;
 }
+
+export interface MapCenter {
+  lat: number;
+  lng: number;
+}
