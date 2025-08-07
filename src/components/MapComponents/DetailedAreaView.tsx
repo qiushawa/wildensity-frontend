@@ -19,7 +19,7 @@ const DetailedAreaView: React.FC<{ areas: any[], zoom: number }> = ({ areas, zoo
                             .map((device: any) => (
                                 <DeviceMark key={device.device_id} device={device} />
                             )):
-                           zoom > ZOOM_THRESHOLD-3 ?
+                           zoom > ZOOM_THRESHOLD - 3 ?
                         <DeviceCountMark
                             count={area.devices?.length || 0}
                             position={[area.circle.center[0], area.circle.center[1]]}
