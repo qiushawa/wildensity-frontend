@@ -7,7 +7,7 @@ function App() {
     return (
         <div className='App'>
             <Routes>
-                <Route path='/wildensity/' >
+                <Route path='/' >
                     <Route index element={<Home />} />
                     <Route path='*' element={<NoMatch />} />
                 </Route>
