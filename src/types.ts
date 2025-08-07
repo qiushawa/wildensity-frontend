@@ -30,7 +30,7 @@ export interface MapCenter {
 }
 
 export interface PolygonLayerProps {
-    positions: [number, number][];
+    positions: LatLng[];
     popupContent?: string;
 }
 
