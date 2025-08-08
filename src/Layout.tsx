@@ -1,46 +1,25 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+
 
 const Layout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-green-800 text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Wildlife Density Observer</h1>
-          <nav className="space-x-4">
-            <NavLink
-              to="/"
-              className={({ isActive }: { isActive: boolean }) =>
-                isActive ? 'text-yellow-300 font-semibold' : 'hover:text-yellow-300'
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/map"
-              className={({ isActive }: { isActive: boolean }) =>
-                isActive ? 'text-yellow-300 font-semibold' : 'hover:text-yellow-300'
-              }
-            >
-              Map
-            </NavLink>
-            <NavLink
-              to="/data"
-              className={({ isActive }: { isActive: boolean }) =>
-                isActive ? 'text-yellow-300 font-semibold' : 'hover:text-yellow-300'
-              }
-            >
-              Data
-            </NavLink>
-          </nav>
-        </div>
-      </header>
-      <main className="container mx-auto flex-grow p-4">
-        <Outlet />
-      </main>
-      <footer className="bg-green-800 text-white p-4 text-center">
-        <p>&copy; 2025 Wildlife Density Observer</p>
-      </footer>
-    </div>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-100 flex flex-col">
+        <Nav navLinks={[
+          { href: '/', label: '首頁' },
+          { href: '/map', label: '樣區地圖' },
+          { href: '/camera', label: '監測設備' }
+        ]} />
+        <main className="container mx-auto flex-grow p-4">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

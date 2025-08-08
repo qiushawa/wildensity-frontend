@@ -37,3 +37,15 @@ export interface PolygonLayerProps {
 export interface ZoomHandlerProps {
     onZoomChange: (zoom: number) => void;
 }
+
+export interface CameraCardProps {
+    Area_id: number;
+    SD_Card: number;
+    status: "ONLINE" | "OFFLINE" | "LOCATION_UNKNOWN";
+    name: string;
+    location: {
+        description: string;
+        latitude: number;
+        longitude: number;
+    };
+}

@@ -15,3 +15,12 @@ html, body, #root {
 	border-radius: 50%;
 	background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, rgba(255, 0, 0, 0) 80%);
 }
+
+.home-header {
+  background: url('/banner.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: bottom;
+  filter: brightness(60%);
+  height: 500px;
+}
