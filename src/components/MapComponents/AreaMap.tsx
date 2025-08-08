@@ -34,7 +34,40 @@ const AreaMap: React.FC<{ focus?: [number, number] | null }> = ({ focus = null }
       zoom={zoom}
       minZoom={8}
       style={{ height: "100%", width: "100%" }}
-      scrollWheelZoom={focus ? false : true}
+// Collapse all interactive flags into one `interactive` boolean and spread it
+const AreaMap: React.FC<{ focus?: LatLngTuple | null }> = ({ focus = null }) => {
+  const [zoom, setZoom] = useState(13);
+  const { areas, loading, error } = useAreas();
+
+  if (loading) return <div>載入中...</div>;
+  if (error)   return <div>載入區域時出錯: {error.message}</div>;
+
+  const center: LatLngTuple = focus || [23.7, 120.43];
+  const interactive = !focus;
+
+  // prepare a single props object
+  const interactiveProps = {
+    scrollWheelZoom: interactive,
+    dragging:         interactive,
+    zoomControl:      interactive,
+    doubleClickZoom:  interactive,
+    touchZoom:        interactive,
+  };
+
+  return (
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      minZoom={8}
+      style={{ height: '100%', width: '100%' }}
+      {...interactiveProps}
+    >
+      <TileLayer url={MAP_TILE_URL} attribution={MAP_TILE_ATTRIBUTION} />
+      {interactive && <ZoomHandler onZoomChange={setZoom} />}
+      <DetailedAreaView areas={areas} zoom={zoom} />
+    </MapContainer>
+  );
+};
       dragging={focus ? false : true}
       zoomControl={focus ? false : true}
       doubleClickZoom={focus ? false : true}
