@@ -17,7 +17,15 @@ const Nav: React.FC<NavProps> = ({ navLinks }) => {
           <h1 className="text-2xl font-bold">動物密度觀測</h1>
           <div className="space-x-4">
             {navLinks.map((link) => (
-              <NavLink key={link.href} to={link.href}>
+              <NavLink
+                key={link.href}
+                to={link.href}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-bold text-blue-600 underline"
+                    : "text-black hover:text-blue-600"
+                }
+              >
                 {link.label}
               </NavLink>
             ))}
