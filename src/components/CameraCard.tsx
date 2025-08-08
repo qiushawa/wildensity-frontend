@@ -1,6 +1,6 @@
 import React from "react";
 import Badge from "./Badge";
-import type { CameraCardProps } from "../types";
+// import type { CameraCardProps } from "../types"; // 暫時性，等功能寫完再用
 import AreaMap from "./MapComponents/AreaMap";
 
 
