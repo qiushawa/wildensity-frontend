@@ -1,5 +1,5 @@
 import { API_BASE } from '../constants/global';
-import type { Device, DeviceLocationUpdate } from '../types';
+import type { DeviceLocationUpdate } from '../types';
 
 export async function updateDeviceLocation(deviceId: number, areaId: number, location: DeviceLocationUpdate) {
     const res = await fetch(`${API_BASE}/areas/${areaId}/devices/${deviceId}/coordinates`, {
