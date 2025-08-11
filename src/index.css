@@ -24,3 +24,11 @@ html, body, #root {
   filter: brightness(60%);
   height: 500px;
 }
+/* 假設彈窗根元素是 .modal */
+.modal {
+  position: fixed; /* 或 absolute，但 fixed 比較常用於彈窗 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* 比一般 UI 高 */
+}

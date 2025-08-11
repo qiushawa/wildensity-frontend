@@ -7,7 +7,7 @@ import { MAP_TILE_URL, MAP_TILE_ATTRIBUTION } from '../../constants/global';
 import 'leaflet/dist/leaflet.css';
 
 // 主地圖組件
-const AreaMap: React.FC = () => {
+const AreaMap: React.FC<{ device_id?: number; disableZoom?: boolean }> = ({ device_id, disableZoom = false }) => {
 	// 狀態：地圖縮放級別，預設為13
 	const [zoom, setZoom] = useState(13);
 
@@ -36,6 +36,10 @@ const AreaMap: React.FC = () => {
 			zoom={zoom}
 			minZoom={8}
 			style={{ height: '100%', width: '100%' }}
+			scrollWheelZoom={!disableZoom}
+			doubleClickZoom={!disableZoom}
+			zoomControl={!disableZoom}
+			dragging={!disableZoom}
 		>
 			{/* 地圖瓦片圖層 */}
 			<TileLayer
@@ -47,7 +51,7 @@ const AreaMap: React.FC = () => {
 			<ZoomHandler onZoomChange={setZoom} />
 
 			{/* 詳細區域視圖顯示 */}
-			<DetailedAreaView areas={areas} zoom={zoom} />
+			<DetailedAreaView areas={areas} zoom={zoom} device_id={device_id} />
 		</MapContainer>
 	);
 };
