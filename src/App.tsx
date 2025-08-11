@@ -1,17 +1,21 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from "./Layout"
-import Home from './pages/Home'
-import Camera from './pages/Camera'
+import HomePage from './pages/HomePage'
+import CameraPage from './pages/CameraPage'
+import DeviceLocationEditPage from './pages/DeviceLocationEditPage'
 import NoMatch from './pages/NoMatch'
+import AreaMapPage from './pages/AreaMapPage'
 import './index.css' // Ensure Tailwind CSS is imported
+
 function App() {
     return (
         <div className='App'>
             <Routes>
                 <Route path='/' element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path='/map' element={<div>樣區地圖</div>} />
-                    <Route path='/camera' element={<Camera />} />
+                    <Route index element={<HomePage />} />
+                    <Route path='/map' element={<AreaMapPage />} />
+                    <Route path='/camera' element={<CameraPage />} />
+                    <Route path="/device/:deviceId/edit-location" element={<DeviceLocationEditPage />} />
                     <Route path='*' element={<NoMatch />} />
                 </Route>
             </Routes>
