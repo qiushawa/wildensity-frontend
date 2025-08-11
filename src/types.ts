@@ -49,3 +49,9 @@ export interface CameraCardProps {
         longitude: number;
     };
 }
+
+export interface DeviceLocationUpdate {
+    latitude: number;
+    longitude: number;
+    location_description: string;
+}
