@@ -20,7 +20,9 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                     <div className="flex flex-col h-full">
                         <div className="relative max-h-[350px]">
                             <div className="object-cover w-full rounded-t-lg h-60">
-                                <AreaMap device_id={device.device_id} disableZoom={true} />
+                                {device.status != 'LOCATION_UNKNOWN' && (
+                                    <AreaMap device_id={device.device_id} disableZoom={true} center={[device.latitude, device?.longitude]} />
+                                )}
                             </div>
                         </div>
                         <div className="relative">
@@ -35,7 +37,7 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                             ) : (
                                 <Badge color="gray" label="位置未知" />
                             )}
-                            <h1 className="text-xl font-semibold my-2">{device.device_name}</h1>
+                            <h1 className="text-xl font-semibold my-2">{device.device_name ?? "未命名設備 - " + device.device_id}</h1>
                             <p className="text-sm">{device.location_description ?? "位置不明"}</p>
                             {device.latitude && device.longitude && (
                                 <p className="text-sm text-gray-500">
@@ -44,7 +46,7 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                                 </p>
                             )}                            {/* 編輯座標按鈕 */}
                             <Link
-                                to={`/device/${device.device_id}/edit-location`}
+                                to={`/area/${device.area_id}/device/${device.device_id}/edit-location`}
                                 className="mt-4 inline-block p-2  rounded"
                                 title="編輯座標"
                             >

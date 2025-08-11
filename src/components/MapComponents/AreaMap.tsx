@@ -7,9 +7,9 @@ import { MAP_TILE_URL, MAP_TILE_ATTRIBUTION } from '../../constants/global';
 import 'leaflet/dist/leaflet.css';
 
 // 主地圖組件
-const AreaMap: React.FC<{ device_id?: number; disableZoom?: boolean }> = ({ device_id, disableZoom = false }) => {
-	// 狀態：地圖縮放級別，預設為13
-	const [zoom, setZoom] = useState(13);
+const AreaMap: React.FC<{ device_id?: number; disableZoom?: boolean , center?: [number, number] }> = ({ device_id, disableZoom = false, center }) => {
+	// 狀態：地圖縮放級別，預設為12
+	const [zoom, setZoom] = useState(12);
 
 	// 從自定義hook獲取區域資料
 	const { areas, loading, error } = useAreas();
@@ -32,9 +32,9 @@ const AreaMap: React.FC<{ device_id?: number; disableZoom?: boolean }> = ({ devi
 	return (
 		// 渲染地圖容器
 		<MapContainer
-			center={[23.7, 120.43]} // 預設中心點
+			center={center || [23.7, 120.43]} // 預設中心點
 			zoom={zoom}
-			minZoom={8}
+			minZoom={7}
 			style={{ height: '100%', width: '100%' }}
 			scrollWheelZoom={!disableZoom}
 			doubleClickZoom={!disableZoom}

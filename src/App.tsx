@@ -15,7 +15,7 @@ function App() {
                     <Route index element={<HomePage />} />
                     <Route path='/map' element={<AreaMapPage />} />
                     <Route path='/camera' element={<CameraPage />} />
-                    <Route path="/device/:deviceId/edit-location" element={<DeviceLocationEditPage />} />
+                    <Route path="/area/:areaId/device/:deviceId/edit-location" element={<DeviceLocationEditPage />} />
                     <Route path='*' element={<NoMatch />} />
                 </Route>
             </Routes>
