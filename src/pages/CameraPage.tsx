@@ -42,13 +42,13 @@ const Camera: React.FC = () => {
 
                 return (
                     <div key={area.area_id} className="mb-8">
-                        <h1 className="text-2xl font-bold mb-4">{area.area_name??`未命名樣區-${area.area_id}`}</h1>
+                        <h1 className="text-2xl font-bold mb-4">{area.area_name ?? `未命名樣區-${area.area_id}`}</h1>
                         <hr className="mb-4 w-[20%] h-1 bg-gray-300" />
                         {areaDevices.length === 0 ? (
                             <div className="text-gray-400">此樣區沒有設備</div>
                         ) : (
                             <>
-                                
+
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                     {areaDevices.map((device) => (
                                         <CameraCard

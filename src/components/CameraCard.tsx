@@ -1,15 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Badge from "./Badge";
 import AreaMap from "./MapComponents/AreaMap";
 import type { Device } from "../types";
-import { FiEdit } from "react-icons/fi"; // 這是 Feather Icons 的鉛筆編輯圖示
+import { FiEdit } from "react-icons/fi";
+import DeviceLocationEdit from "./DeviceLocationEdit";
+
 interface CameraCardProps {
     device: Device;
 }
 
 const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <>
@@ -20,15 +21,16 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                     <div className="flex flex-col h-full">
                         <div className="relative max-h-[350px]">
                             <div className="object-cover w-full rounded-t-lg h-60">
-                                {device.status != 'LOCATION_UNKNOWN' && (
-                                    <AreaMap device_id={device.device_id} disableZoom={true} center={[device.latitude, device?.longitude]} />
+                                {device.status !== "LOCATION_UNKNOWN" && (
+                                    <AreaMap
+                                        device_id={device.device_id}
+                                        disableZoom={true}
+                                        center={[device.latitude, device.longitude]}
+                                    />
                                 )}
                             </div>
                         </div>
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent"></div>
-                        </div>
-                        
+
                         <div className="p-6 text-lg">
                             {device.status === "ONLINE" ? (
                                 <Badge color="green" label="線上" />
@@ -37,27 +39,40 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                             ) : (
                                 <Badge color="gray" label="位置未知" />
                             )}
-                            <h1 className="text-xl font-semibold my-2">{device.device_name ?? "未命名設備 - " + device.device_id}</h1>
+
+                            <h1 className="text-xl font-semibold my-2">
+                                {device.device_name ?? `未命名設備 - ${device.device_id}`}
+                            </h1>
                             <p className="text-sm">{device.location_description ?? "位置不明"}</p>
                             {device.latitude && device.longitude && (
                                 <p className="text-sm text-gray-500">
                                     經度: {device.longitude} <br />
                                     緯度: {device.latitude}
                                 </p>
-                            )}                            {/* 編輯座標按鈕 */}
-                            <Link
-                                to={`/area/${device.area_id}/device/${device.device_id}/edit-location`}
-                                className="mt-4 inline-block p-2  rounded"
+                            )}
+
+                            {/* 改成直接打開 modal */}
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                className="mt-4 inline-block p-2 rounded hover:bg-gray-200"
                                 title="編輯座標"
                             >
                                 <FiEdit size={20} />
-                            </Link>
-
-
+                            </button>
                         </div>
                     </div>
                 </section>
             </div>
+
+            {/* 編輯設備座標 Modal */}
+            {isModalOpen && (
+                <DeviceLocationEdit
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                    deviceId={device.device_id}
+                    areaId={device.area_id}
+                />
+            )}
         </>
     );
 };
