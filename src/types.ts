@@ -11,12 +11,12 @@ export interface Area {
         center: LatLng;
         radius: number;
     };
-    devices?: Device[];
+    cameras?: Camera[];
 }
 
-export interface Device {
-    device_id: number;
-    device_name: string;
+export interface Camera {
+    camera_id: number;
+    camera_name: string;
     area_id: number;
     latitude: number;
     longitude: number;
@@ -50,7 +50,7 @@ export interface CameraCardProps {
     };
 }
 
-export interface DeviceLocationUpdate {
+export interface CameraLocationUpdate {
     latitude: number;
     longitude: number;
     location_description: string;

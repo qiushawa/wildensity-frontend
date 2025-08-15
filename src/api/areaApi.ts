@@ -24,8 +24,8 @@ export async function getAreaById(areaId: number) {
 };
 
 // 獲取區域設備列表
-export async function getAreaDevices(areaId: number) {
-    const res = await fetch(`${API_BASE}/areas/${areaId}/devices`);
+export async function getAreaCameras(areaId: number) {
+    const res = await fetch(`${API_BASE}/areas/${areaId}/cameras`);
     if (!res.ok) throw new Error('取得區域設備列表失敗');
 
     const json = await res.json();

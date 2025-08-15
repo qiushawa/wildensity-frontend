@@ -4,7 +4,7 @@ import { HiStatusOffline } from "react-icons/hi";
 import ReactDOMServer from 'react-dom/server';
 
 
-const DeviceIcon = ({ status }: { status: "ONLINE" | "OFFLINE" }): L.DivIcon => {
+const CameraIcon = ({ status }: { status: "ONLINE" | "OFFLINE" }): L.DivIcon => {
     const icon = new L.DivIcon({
         html: ReactDOMServer.renderToString(
             <div style={{
@@ -29,4 +29,4 @@ const DeviceIcon = ({ status }: { status: "ONLINE" | "OFFLINE" }): L.DivIcon => 
     return icon;
 }
 
-export default DeviceIcon;
+export default CameraIcon;

@@ -2,7 +2,7 @@ import L from 'leaflet';
 import ReactDOMServer from 'react-dom/server';
 
 
-const DeviceCountMark = ({ count }: { count: number }): L.DivIcon => {
+const CameraCountMark = ({ count }: { count: number }): L.DivIcon => {
     const icon = new L.DivIcon({
         html: ReactDOMServer.renderToString(
             <div style={{
@@ -22,4 +22,4 @@ const DeviceCountMark = ({ count }: { count: number }): L.DivIcon => {
     return icon;
 }
 
-export default DeviceCountMark;
+export default CameraCountMark;

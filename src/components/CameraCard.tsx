@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Badge from "./Badge";
 import AreaMap from "./MapComponents/AreaMap";
-import type { Device } from "../types";
+import type { Camera } from "../types";
 import { FiEdit } from "react-icons/fi";
-import DeviceLocationEdit from "./DeviceLocationEdit";
+import CameraLocationEdit from "./CameraLocationEdit";
 
 interface CameraCardProps {
-    device: Device;
+    camera: Camera;
 }
 
-const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
+const CameraCard: React.FC<CameraCardProps> = ({ camera }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
@@ -21,33 +21,33 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                     <div className="flex flex-col h-full">
                         <div className="relative max-h-[350px]">
                             <div className="object-cover w-full rounded-t-lg h-60">
-                                {device.status !== "LOCATION_UNKNOWN" && (
+                                {camera.status !== "LOCATION_UNKNOWN" && (
                                     <AreaMap
-                                        device_id={device.device_id}
+                                        camera_id={camera.camera_id}
                                         disableZoom={true}
-                                        center={[device.latitude, device.longitude]}
+                                        center={[camera.latitude, camera.longitude]}
                                     />
                                 )}
                             </div>
                         </div>
 
                         <div className="p-6 text-lg">
-                            {device.status === "ONLINE" ? (
+                            {camera.status === "ONLINE" ? (
                                 <Badge color="green" label="線上" />
-                            ) : device.status === "OFFLINE" ? (
+                            ) : camera.status === "OFFLINE" ? (
                                 <Badge color="red" label="離線" />
                             ) : (
                                 <Badge color="gray" label="位置未知" />
                             )}
 
                             <h1 className="text-xl font-semibold my-2">
-                                {device.device_name ?? `未命名設備 - ${device.device_id}`}
+                                {camera.camera_name ?? `未命名相機 - ${camera.camera_id}`}
                             </h1>
-                            <p className="text-sm">{device.location_description ?? "位置不明"}</p>
-                            {device.latitude && device.longitude && (
+                            <p className="text-sm">{camera.location_description ?? "位置不明"}</p>
+                            {camera.latitude && camera.longitude && (
                                 <p className="text-sm text-gray-500">
-                                    經度: {device.longitude} <br />
-                                    緯度: {device.latitude}
+                                    經度: {camera.longitude} <br />
+                                    緯度: {camera.latitude}
                                 </p>
                             )}
 
@@ -64,13 +64,13 @@ const CameraCard: React.FC<CameraCardProps> = ({ device }) => {
                 </section>
             </div>
 
-            {/* 編輯設備座標 Modal */}
+            {/* 編輯相機座標 Modal */}
             {isModalOpen && (
-                <DeviceLocationEdit
+                <CameraLocationEdit
                     isModalOpen={isModalOpen}
                     setIsModalOpen={setIsModalOpen}
-                    deviceId={device.device_id}
-                    areaId={device.area_id}
+                    cameraId={camera.camera_id}
+                    areaId={camera.area_id}
                 />
             )}
         </>

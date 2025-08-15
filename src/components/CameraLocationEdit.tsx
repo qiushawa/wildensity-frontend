@@ -3,33 +3,33 @@ import type { FC } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import {
-    updateDeviceLocation,
-    getDeviceLocation,
-    updateDeviceInfo
-} from "../api/DeviceApi";
+    updateCameraLocation,
+    getCameraLocation,
+    updateCameraInfo
+} from "../api/CameraApi";
 import { getAreaById } from "../api/areaApi";
 
-interface DeviceLocationEditProps {
+interface CameraLocationEditProps {
     isModalOpen: boolean;
     setIsModalOpen: (open: boolean) => void;
-    deviceId: number;
+    cameraId: number;
     areaId: number;
 }
 
-const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsModalOpen, deviceId, areaId }) => {
+const CameraLocationEdit: FC<CameraLocationEditProps> = ({ isModalOpen, setIsModalOpen, cameraId, areaId }) => {
     const [lat, setLat] = useState<number>(25.04);
     const [lng, setLng] = useState<number>(121.54);
-    const [deviceName, setDeviceName] = useState<string>("");
+    const [cameraName, setCameraName] = useState<string>("");
     const [locationDescription, setLocationDescription] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        async function fetchDevice() {
+        async function fetchCamera() {
             setLoading(true);
-            const data = await getDeviceLocation(deviceId, areaId);
+            const data = await getCameraLocation(cameraId, areaId);
             const areaData = await getAreaById(areaId);
             console.log(data);
-            setDeviceName(data.device_name || "未命名設備");
+            setCameraName(data.camera_name || "未命名相機");
             setLocationDescription(data.location_description || "無位置描述");
             if ((data.latitude === undefined || data.longitude === undefined) && areaData.circle) {
                 setLat(areaData.circle.center[0]);
@@ -40,8 +40,8 @@ const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsMod
             }
             setLoading(false);
         }
-        fetchDevice();
-    }, [deviceId, areaId]);
+        fetchCamera();
+    }, [cameraId, areaId]);
 
     const MapClickHandler = () => {
         useMapEvents({
@@ -55,12 +55,12 @@ const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsMod
 
     const handleSave = async () => {
         try {
-            await updateDeviceLocation(deviceId, areaId, {
+            await updateCameraLocation(cameraId, areaId, {
                 latitude: lat,
                 longitude: lng,
                 location_description: locationDescription,
             });
-            await updateDeviceInfo(deviceId, areaId, deviceName);
+            await updateCameraInfo(cameraId, areaId, cameraName);
             alert("儲存成功！");
             setIsModalOpen(false);
         } catch (error) {
@@ -90,7 +90,7 @@ const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsMod
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative z-[1000]">
                             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                                編輯設備座標 (設備ID: {deviceId})
+                                編輯相機座標 (相機ID: {cameraId})
                             </h2>
 
                             <MapContainer
@@ -113,9 +113,9 @@ const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsMod
                             <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                     type="text"
-                                    value={deviceName}
-                                    onChange={(e) => setDeviceName(e.target.value)}
-                                    placeholder="設備名稱"
+                                    value={cameraName}
+                                    onChange={(e) => setCameraName(e.target.value)}
+                                    placeholder="相機名稱"
                                     className="border rounded p-2"
                                 />
                                 <input
@@ -159,4 +159,4 @@ const DeviceLocationEdit: FC<DeviceLocationEditProps> = ({ isModalOpen, setIsMod
     );
 };
 
-export default DeviceLocationEdit;
+export default CameraLocationEdit;

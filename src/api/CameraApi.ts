@@ -1,8 +1,8 @@
 import { API_BASE } from '../constants/global';
-import type { DeviceLocationUpdate } from '../types';
+import type { CameraLocationUpdate } from '../types';
 
-export async function updateDeviceLocation(deviceId: number, areaId: number, location: DeviceLocationUpdate) {
-    const res = await fetch(`${API_BASE}/areas/${areaId}/devices/${deviceId}/coordinates`, {
+export async function updateCameraLocation(cameraId: number, areaId: number, location: CameraLocationUpdate) {
+    const res = await fetch(`${API_BASE}/areas/${areaId}/cameras/${cameraId}/coordinates`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -15,8 +15,8 @@ export async function updateDeviceLocation(deviceId: number, areaId: number, loc
     return json.data; // 更新後的設備資料
 }
 
-export async function getDeviceLocation(deviceId: number, areaId: number) {
-    const res = await fetch(`${API_BASE}/areas/${areaId}/devices/${deviceId}/coordinates`);
+export async function getCameraLocation(cameraId: number, areaId: number) {
+    const res = await fetch(`${API_BASE}/areas/${areaId}/cameras/${cameraId}/coordinates`);
     if (!res.ok) throw new Error('獲取設備位置失敗');
     const json = await res.json();
     if (json.code !== 200) throw new Error(json.message || 'API 回傳錯誤');
@@ -24,15 +24,15 @@ export async function getDeviceLocation(deviceId: number, areaId: number) {
 }
 
 // 更新設備資訊
-export async function updateDeviceInfo(deviceId: number, areaId: number, deviceName: string) {
-    console.log(`Updating device info for deviceId: ${deviceId}, areaId: ${areaId}, device_name: ${deviceName}`);
-    const res = await fetch(`${API_BASE}/areas/${areaId}/devices/${deviceId}`, {
+export async function updateCameraInfo(cameraId: number, areaId: number, cameraName: string) {
+    console.log(`Updating camera info for cameraId: ${cameraId}, areaId: ${areaId}, camera_name: ${cameraName}`);
+    const res = await fetch(`${API_BASE}/areas/${areaId}/cameras/${cameraId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            deviceName,
+            cameraName,
         }),
     });
     if (!res.ok) throw new Error('更新設備資訊失敗');

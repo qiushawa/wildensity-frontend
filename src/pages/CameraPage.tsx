@@ -1,17 +1,17 @@
 import React from "react";
 import CameraCard from "../components/CameraCard";
-import { useAreaDevices } from "../hooks/useAreaDevices";
+import { useAreaCameras } from "../hooks/useAreaCameras";
 import { useAreas } from "../hooks/useAreas";
-import type { Device } from "../types";
+import type { Camera } from "../types";
 
-function uniqueDevices(devices: Device[]): Device[] {
-    const seen = new Set<number>();
-    const unique: Device[] = [];
-    for (const d of devices) {
-        if (!seen.has(d.device_id)) {
-            seen.add(d.device_id);
+function uniqueCameras(cameras: Camera[]): Camera[] {
+    const seen = new Set<string>();
+    const unique: Camera[] = [];
+    for (const d of cameras) {
+        if (!seen.has(`${d.camera_id}-${d.area_id}`)) {
+            seen.add(`${d.camera_id}-${d.area_id}`);
             unique.push(d);
-        }
+        }   
     }
     return unique;
 }
@@ -23,37 +23,36 @@ const Camera: React.FC = () => {
         return Array.isArray(areas) ? areas.map(area => area.area_id) : [];
     }, [areas]);
 
-    const { devices = [], loading: devicesLoading, error: devicesError } =
-        useAreaDevices(areaIds.length > 0 ? areaIds : []);
+    const { cameras = [], loading: camerasLoading, error: camerasError } =
+        useAreaCameras(areaIds.length > 0 ? areaIds : []);
 
-    const uniqueDevicesList = React.useMemo(() => uniqueDevices(devices), [devices]);
+    const uniqueCamerasList = React.useMemo(() => uniqueCameras(cameras), [cameras]);
 
-    if (areasLoading || devicesLoading) return <div>Loading...</div>;
-    if (areasError || devicesError) return <div>Error loading devices</div>;
+    if (areasLoading || camerasLoading) return <div>Loading...</div>;
+    if (areasError || camerasError) return <div>Error loading cameras</div>;
 
     if (areas.length === 0) {
         return <div className="text-center text-gray-500">沒有樣區資料</div>;
     }
-
     return (
         <div>
             {areas.map((area) => {
-                const areaDevices = uniqueDevicesList.filter(d => d.area_id === area.area_id);
+                const areaCameras = uniqueCamerasList.filter(d => d.area_id === area.area_id);
 
                 return (
                     <div key={area.area_id} className="mb-8">
                         <h1 className="text-2xl font-bold mb-4">{area.area_name ?? `未命名樣區-${area.area_id}`}</h1>
                         <hr className="mb-4 w-[20%] h-1 bg-gray-300" />
-                        {areaDevices.length === 0 ? (
-                            <div className="text-gray-400">此樣區沒有設備</div>
+                        {areaCameras.length === 0 ? (
+                            <div className="text-gray-400">此樣區沒有相機</div>
                         ) : (
                             <>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                    {areaDevices.map((device) => (
+                                    {areaCameras.map((camera) => (
                                         <CameraCard
-                                            key={`area-${area.area_id}-device-${device.device_id}`}
-                                            device={device}
+                                            key={`area-${area.area_id}-camera-${camera.camera_id}`}
+                                            camera={camera}
                                         />
                                     ))}
                                 </div>
