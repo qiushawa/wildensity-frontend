@@ -1,10 +1,10 @@
 import React from 'react';
-import DeviceMark from './DeviceMark';
+import CameraMark from './CameraMark';
 import AreaLayer from './AreaLayer';
 import { ZOOM_THRESHOLD } from '../../constants/global';
-import DeviceCountMark from './DeviceCountMark';
+import CameraCountMark from './CameraCountMark';
 
-const DetailedAreaView: React.FC<{ areas: any[], zoom: number , device_id?: number }> = ({ areas, zoom, device_id }) => {
+const DetailedAreaView: React.FC<{ areas: any[], zoom: number , camera_id?: number }> = ({ areas, zoom, camera_id }) => {
     return (
         <>
             {areas.map(area => {
@@ -23,16 +23,16 @@ const DetailedAreaView: React.FC<{ areas: any[], zoom: number , device_id?: numb
                         )}
 
                         {zoom >= ZOOM_THRESHOLD
-                            ? area.devices
-                                  ?.filter((device: any) => device.status !== 'LOCATION_UNKNOWN')
-                                  .filter((device: any) => !device_id || device.device_id === device_id)
-                                  .map((device: any) => (
-                                      <DeviceMark key={device.device_id} device={device} />
+                            ? area.cameras
+                                  ?.filter((camera: any) => camera.status !== 'LOCATION_UNKNOWN')
+                                  .filter((camera: any) => !camera_id || camera.camera_id === camera_id)
+                                  .map((camera: any) => (
+                                      <CameraMark key={camera.camera_id} camera={camera} />
                                   ))
                             : zoom > ZOOM_THRESHOLD - 3 && hasCircleCenter
                             ? (
-                                <DeviceCountMark
-                                    count={area.devices?.length || 0}
+                                <CameraCountMark
+                                    count={area.cameras?.length || 0}
                                     position={[area.circle.center[0], area.circle.center[1]]}
                                 />
                             )

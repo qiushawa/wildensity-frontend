@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react';
-import { getAreaDevices } from '../api/areaApi';
-import type { Device } from '../types';
+import { getAreaCameras } from '../api/areaApi';
+import type { Camera } from '../types';
 
-export function useAreaDevices(area_ids: number[]): {
-    devices: Device[];
+export function useAreaCameras(area_ids: number[]): {
+    cameras: Camera[];
     loading: boolean;
     error: Error | null;
 } {
-    const [devices, setDevices] = useState<Device[]>([]);
+    const [cameras, setCameras] = useState<Camera[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         if (area_ids.length === 0) {
-            setDevices([]);
+            setCameras([]);
             setLoading(false);
             return;
         }
         setLoading(true);
-        Promise.all(area_ids.map(id => getAreaDevices(id)))
+        Promise.all(area_ids.map(id => getAreaCameras(id)))
             .then(results => {
                 const merged = results.flat();
-                setDevices(merged);
+                setCameras(merged);
                 setError(null);
             })
             .catch(error => {
                 setError(error);
-                setDevices([]);
+                setCameras([]);
             })
             .finally(() => setLoading(false));
     }, [JSON.stringify(area_ids)]);
 
-    return { devices, loading, error };
+    return { cameras, loading, error };
 }
