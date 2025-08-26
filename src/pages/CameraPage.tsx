@@ -11,12 +11,12 @@ function uniqueCameras(cameras: Camera[]): Camera[] {
         if (!seen.has(`${d.camera_id}-${d.area_id}`)) {
             seen.add(`${d.camera_id}-${d.area_id}`);
             unique.push(d);
-        }   
+        }
     }
     return unique;
 }
 
-const Camera: React.FC = () => {
+const CameraPage: React.FC = () => {
     const { areas = [], loading: areasLoading, error: areasError } = useAreas();
 
     const areaIds = React.useMemo(() => {
@@ -65,4 +65,4 @@ const Camera: React.FC = () => {
     );
 };
 
-export default Camera;
+export default CameraPage;

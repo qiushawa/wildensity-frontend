@@ -45,10 +45,15 @@ const CameraCard: React.FC<CameraCardProps> = ({ camera }) => {
                             </h1>
                             <p className="text-sm">{camera.location_description ?? "位置不明"}</p>
                             {camera.latitude && camera.longitude && (
-                                <p className="text-sm text-gray-500">
-                                    經度: {camera.longitude} <br />
-                                    緯度: {camera.latitude}
-                                </p>
+                                <>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        經度: {camera.longitude} <br />
+                                        緯度: {camera.latitude}
+                                    </p>
+                                    <p className="text-sm text-gray-600 mt-2">
+                                         {(camera.sd_card_used_space / 1000).toFixed(2)} / {(camera.sd_card_capacity / 1000).toFixed(2)} GB
+                                    </p>
+                                </>
                             )}
 
                             {/* 改成直接打開 modal */}
