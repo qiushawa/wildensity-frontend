@@ -20,6 +20,8 @@ export interface Camera {
     area_id: number;
     latitude: number;
     longitude: number;
+    sd_card_capacity: number;
+    sd_card_used_space: number;
     location_description?: string;
     status: string;
 }
