@@ -2,17 +2,25 @@ import React, { useState } from "react";
 
 interface ButtonListProps {
   options: string[];
+  onSelect?: (option: string) => void; // Callback for selection
 }
 
-const ButtonList: React.FC<ButtonListProps> = ({ options }) => {
+const ButtonList: React.FC<ButtonListProps> = ({ options, onSelect }) => {
   const [selected, setSelected] = useState<string | null>(null);
+
+  const handleClick = (option: string) => {
+    setSelected(option);
+    if (onSelect) {
+      onSelect(option); // Notify parent of selection
+    }
+  };
 
   return (
     <div className="inline-flex rounded-md shadow-sm" role="group">
       {options.map((option, index) => (
         <button
           key={index}
-          onClick={() => setSelected(option)}
+          onClick={() => handleClick(option)}
           className={`px-4 py-2 text-sm font-medium border border-gray-300 
             ${
               selected === option
