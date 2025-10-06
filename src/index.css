@@ -32,3 +32,11 @@ html, body, #root {
   transform: translate(-50%, -50%);
   z-index: 9999; /* 比一般 UI 高 */
 }
+
+.area-label {
+  border-radius: 4px;
+  padding: 2px 4px;
+  pointer-events: none;
+  font-size: 12px;
+  text-align: center;
+}
