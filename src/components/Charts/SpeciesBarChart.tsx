@@ -21,7 +21,6 @@ interface SpeciesBarChartProps {
 
 const SpeciesBarChart: React.FC<SpeciesBarChartProps> = ({ selectedArea, areas, species }) => {
   // 過濾只啟用的物種
-  const enabledSpecies = species.filter(s => s.enable);
 
   const barData = selectedArea
     ? areas

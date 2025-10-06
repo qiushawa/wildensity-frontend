@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 interface Area {
   name: string;
@@ -21,7 +21,6 @@ interface SpeciesPieChartProps {
 
 const SpeciesPieChart: React.FC<SpeciesPieChartProps> = ({ selectedArea, areas, species }) => {
   // 過濾啟用物種
-  const enabledSpecies = species.filter(s => s.enable);
 
   const pieData = selectedArea
     ? areas
@@ -48,7 +47,7 @@ const SpeciesPieChart: React.FC<SpeciesPieChartProps> = ({ selectedArea, areas, 
               cx="50%"
               cy="50%"
               outerRadius={80}
-              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+              label={({ name, percent }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
             >
               {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />

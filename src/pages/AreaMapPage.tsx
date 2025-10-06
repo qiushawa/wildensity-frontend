@@ -149,7 +149,7 @@ const sampleData = [
         {/* 地圖 */}
         <div className="lg:w-1/3 w-full h-[800px]">
           <AnimalDensityChoroplethWithSpecies
-            areas={convertAreasToGeoJSON(areas)}
+            areas={convertAreasToGeoJSON(areas) as any}
             species={species}
             setSelectedArea={setSelectedArea}
           />
@@ -168,7 +168,7 @@ const sampleData = [
             <h1 className="text-4xl text-center mt-12">{selectedArea || "全部樣區"}</h1>
             <div className="h-[325px]">
               <SightingRecord
-                data={sampleData}
+                data={sampleData as any}
                 species={species}
                 selectedAreaIndex={selectedAreaIndex}
               />

@@ -117,8 +117,8 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
   />
 
   <GeoJSON
-    data={areas}
-    style={style}
+    data={areas as any}
+    style={style as any}
     onEachFeature={onEachFeature}
   />
 </MapContainer>
