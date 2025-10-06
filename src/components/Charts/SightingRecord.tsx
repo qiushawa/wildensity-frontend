@@ -10,6 +10,16 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+interface Species {
+  name: string;
+  enable: boolean;
+  color: string;
+}
+interface MultiSpeciesData {
+  time: string;
+  num_individuals: number[];
+}
+
 interface SightingRecordProps {
   data: MultiSpeciesData[][];  // 多樣區
   species: Species[];
