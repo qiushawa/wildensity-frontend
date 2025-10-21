@@ -61,13 +61,15 @@ const CameraLocationEdit: FC<CameraLocationEditProps> = ({ isModalOpen, setIsMod
                 location_description: locationDescription,
             });
             await updateCameraInfo(cameraId, areaId, cameraName);
-            alert("儲存成功！");
+            window.location.reload();
             setIsModalOpen(false);
         } catch (error) {
             alert("儲存失敗：" + error);
         }
     };
 
+    // 強制重新整理畫面
+    
     if (loading) return <div className="text-center text-gray-500">Loading...</div>;
 
     return (

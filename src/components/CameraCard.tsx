@@ -28,6 +28,11 @@ const CameraCard: React.FC<CameraCardProps> = ({ camera }) => {
                                         center={[camera.latitude, camera.longitude]}
                                     />
                                 )}
+                                {camera.status === "LOCATION_UNKNOWN" && (
+                                    <div className="flex items-center justify-center h-full bg-gray-100 text-gray-500">
+                                        位置未知，無法顯示地圖
+                                    </div>
+                                )}
                             </div>
                         </div>
 

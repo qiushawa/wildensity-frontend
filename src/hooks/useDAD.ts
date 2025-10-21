@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getAllAreas } from '../api/areaApi';
-import type { AreaB } from '../types';
+import { getDAD } from '../api/DADApi';
+import type { MultiSpeciesData } from '../types';
 
 const POLLING_INTERVAL = 300000; // 30 seconds
 
-export function useAreas() {
-    const [areas, setAreas] = useState<AreaB[]>([]);
+export function useDAD() {
+    const [DAD, setDAD] = useState<MultiSpeciesData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         const fetchData = () => {
-            getAllAreas()
-                .then(setAreas)
+            getDAD()
+                .then(setDAD)
                 .catch(setError)
                 .finally(() => {
                     if (loading) {
@@ -20,12 +20,12 @@ export function useAreas() {
                     }
                 });
         };
-
+        
         fetchData();
         const intervalId = setInterval(fetchData, POLLING_INTERVAL);
 
         return () => clearInterval(intervalId);
     }, [loading]);
 
-    return { areas, loading, error };
+    return { DAD, loading, error };
 }

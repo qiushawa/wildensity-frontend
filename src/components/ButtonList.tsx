@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface ButtonListProps {
   options: string[];
-  onSelect?: (option: string) => void; // Callback for selection
+  selected: string;           // 父元件控制
+  onSelect: (value: string) => void;
 }
 
-const ButtonList: React.FC<ButtonListProps> = ({ options, onSelect }) => {
-  const [selected, setSelected] = useState<string | null>(null);
-
+const ButtonList: React.FC<ButtonListProps> = ({ options, selected, onSelect }) => {
   const handleClick = (option: string) => {
-    setSelected(option);
-    if (onSelect) {
-      onSelect(option); // Notify parent of selection
-    }
+    onSelect(option); // 通知父元件更新 selected
   };
 
   return (

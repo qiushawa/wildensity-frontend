@@ -9,17 +9,13 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
+import type { Species } from "../../types";
 
 interface Area {
   name: string;
   density: (number | null)[];
 }
 
-interface Species {
-  name: string;
-  enable: boolean;
-  color: string;
-}
 
 interface Props {
   areas: Area[];
@@ -27,14 +23,14 @@ interface Props {
 }
 
 const GlobalSpeciesBarChart: React.FC<Props> = ({ areas, species }) => {
-  const enabledSpecies = species.filter(s => s.enable);
+  const enabledSpecies = species.filter(s => s.enabled);
 
   // 將密度資料正確對應到啟用物種
   const chartData = areas.map(area => {
     const obj: any = { area: area.name };
     enabledSpecies.forEach(sp => {
-      const originalIndex = species.findIndex(s => s.name === sp.name);
-      obj[sp.name] = area.density[originalIndex] ?? 0;
+      const originalIndex = species.findIndex(s => s.species_name === sp.species_name);
+      obj[sp.species_name] = area.density[originalIndex] ?? 0;
     });
     return obj;
   });
@@ -52,8 +48,8 @@ const GlobalSpeciesBarChart: React.FC<Props> = ({ areas, species }) => {
         <Legend verticalAlign="top" align="center" />
         {enabledSpecies.map(sp => (
           <Bar
-            key={sp.name}
-            dataKey={sp.name}
+            key={sp.species_name}
+            dataKey={sp.species_name}
             fill={sp.color}
             barSize={30}
           />
