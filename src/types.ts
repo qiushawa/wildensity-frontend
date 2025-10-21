@@ -1,17 +1,15 @@
 export type LatLng = [number, number];
 
 export interface Area {
-    area_id: number;
-    area_name: string;
-    boundary: {
-        type: string;
-        coordinates: number[][][];
-    };
-    circle: {
-        center: LatLng;
-        radius: number;
-    };
-    cameras?: Camera[];
+  name: string;
+  coordinates: [number, number][];
+  density: (number | null)[];
+}
+export interface AreaB {
+  area_name: string;
+  area_id: number;
+  coordinates: [number, number][];
+  density: (number | null)[];
 }
 
 export interface Camera {
@@ -56,4 +54,28 @@ export interface CameraLocationUpdate {
     latitude: number;
     longitude: number;
     location_description: string;
+}
+
+export interface GeoJSONFeature {
+  type: "Feature";
+  properties: {
+    name: string;
+    density: (number | null)[];
+  };
+  geometry: {
+    type: "Polygon";
+    coordinates: [number, number][][];
+  };
+}
+
+export interface MultiSpeciesData {
+  time: string;
+  num_individuals: (number | null)[];
+}
+
+export interface Species {
+    species_id: number;
+    species_name: string;
+    color?: string;
+    enabled: boolean;
 }

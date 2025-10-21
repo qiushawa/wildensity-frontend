@@ -34,3 +34,14 @@ export async function getAreaCameras(areaId: number) {
 
     return json.data; // 區域設備列表
 }
+
+export async function getAllAreaInfo() {
+    const res = await fetch(`${API_BASE}/areas/info/all`);
+    if (!res.ok) throw new Error('取得區域詳細資訊失敗');
+
+    const json = await res.json();
+
+    if (json.code !== 200) throw new Error(json.message || 'API 回傳錯誤');
+    
+    return json.data; // 區域詳細資訊
+}
