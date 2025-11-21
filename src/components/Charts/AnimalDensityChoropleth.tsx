@@ -79,6 +79,7 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
   const onEachFeature = (feature: RegionFeature, layer: L.Layer) => {
     layer.on({
       click: () => {
+        console.log('Clicked feature:', feature);
         const center = getPolygonCenter(feature.geometry.coordinates);
         setLocalSelectedArea((prev) =>
           prev === feature.properties.name ? null : feature.properties.name
@@ -89,6 +90,7 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
         setSelectedPosition((prev) =>
           prev && prev[0] === center[0] && prev[1] === center[1] ? null : center
         );
+        console.log('Selected position:', selectedPosition);
       },
     });
   };
@@ -102,7 +104,7 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
 
   // 啟用物種
   const enabledSpecies = species.filter((s) => s.enabled).map((s) => s.species_name);
-
+  console.log('Enabled Species:', enabledSpecies);
   // ---------- 顏色圖例資料 ----------
   const legendItems = [
     { range: '> 20', color: '#800026' },
