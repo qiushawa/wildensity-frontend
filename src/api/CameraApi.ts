@@ -40,3 +40,12 @@ export async function updateCameraInfo(cameraId: number, areaId: number, cameraN
     if (json.code !== 200) throw new Error(json.message || 'API 回傳錯誤');
     return json.data; // 更新後的設備資料
 }
+
+// 獲取樣區內所有設備資訊
+export async function getAreaCameras(areaId: number) {
+    const res = await fetch(`${API_BASE}/areas/${areaId}/cameras`);
+    if (!res.ok) throw new Error('獲取樣區設備失敗');
+    const json = await res.json();
+    if (json.code !== 200) throw new Error(json.message || 'API 回傳錯誤');
+    return json.data; // 樣區內設備列表
+}

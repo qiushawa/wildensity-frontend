@@ -1,0 +1,17 @@
+{
+  "code": 200,
+  "message": "成功",
+  "data": [
+    {
+      "camera_id": 10000,
+      "area_id": 10000,
+      "camera_name": "未命名相機 - 10000",
+      "location_description": "龍過脈坪頂步道入口",
+      "longitude": 120.4,
+      "latitude": 23.7,
+      "sd_card_capacity": 8000,
+      "sd_card_used_space": 16000,
+      "status": "OFFLINE"
+    }
+  ]
+}

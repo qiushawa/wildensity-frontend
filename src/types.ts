@@ -79,3 +79,27 @@ export interface Species {
     color?: string;
     enabled: boolean;
 }
+
+export interface Event {
+    event_id: number;
+    camera_id: number;
+    area_id: number;
+    species_id: number;
+    start_timestamp: string;
+    end_timestamp: string;
+    duration_s: number;
+    movement_distance_m: number;
+    num_individuals: number;
+}
+
+export interface Pagination {
+    total: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+}
+
+export interface EventsResponse {
+    events: Event[];
+    pagination: Pagination;
+}

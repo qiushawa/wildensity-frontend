@@ -15,6 +15,8 @@ const Layout: React.FC = () => {
         navLinks={[
           { href: "/map", label: "樣區地圖" },
           { href: "/camera", label: "監測設備" },
+          { href: "/events", label: "事件歷史" },
+
         ]}
       />
 
