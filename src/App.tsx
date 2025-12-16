@@ -5,6 +5,7 @@ import CameraPage from './pages/CameraPage'
 import NoMatch from './pages/NoMatch'
 import AreaMapPage from './pages/AreaMapPage'
 import EventHistoryPage from './pages/EventHistoryPage'
+import Demo from './pages/demo'
 import './index.css' // Ensure Tailwind CSS is imported
 
 
@@ -17,7 +18,7 @@ function App() {
                     <Route path='/map' element={<AreaMapPage />} />
                     <Route path='/camera' element={<CameraPage />} />
                     <Route path='/events' element={<EventHistoryPage />} />
-
+                    <Route path='/demo' element={<Demo />} />
                     <Route path='*' element={<NoMatch />} />
                 </Route>
             </Routes>
