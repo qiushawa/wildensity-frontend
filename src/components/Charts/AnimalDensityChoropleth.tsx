@@ -43,12 +43,12 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
   // ---------- 顏色映射 ----------
   const getColor = (d: number | null) => {
     if (d == null) return '#ccc'; // 無資料
-    if (d > 20) return '#800026';
-    if (d > 10) return '#BD0026';
-    if (d > 5) return '#E31A1C';
-    if (d > 2) return '#FC4E2A';
-    if (d > 1) return '#FD8D3C';
-    if (d > 0.3) return '#FEB24C';
+    if (d > 100) return '#800026';
+    if (d > 80) return '#BD0026';
+    if (d > 50) return '#E31A1C';
+    if (d > 30) return '#FC4E2A';
+    if (d > 10) return '#FD8D3C';
+    if (d > 5) return '#FEB24C';
     if (d >= 0) return '#FFEDA0';
     return '#ccc';
   };
