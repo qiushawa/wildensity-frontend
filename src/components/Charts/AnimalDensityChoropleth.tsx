@@ -106,14 +106,26 @@ const AnimalDensityChoroplethWithSpecies: React.FC<Props> = ({
   const enabledSpecies = species.filter((s) => s.enabled).map((s) => s.species_name);
   console.log('Enabled Species:', enabledSpecies);
   // ---------- 顏色圖例資料 ----------
+    // ---------- 顏色映射 ----------
+  // const getColor = (d: number | null) => {
+  //   if (d == null) return '#ccc'; // 無資料
+  //   if (d > 100) return '#800026';
+  //   if (d > 80) return '#BD0026';
+  //   if (d > 50) return '#E31A1C';
+  //   if (d > 30) return '#FC4E2A';
+  //   if (d > 10) return '#FD8D3C';
+  //   if (d > 5) return '#FEB24C';
+  //   if (d >= 0) return '#FFEDA0';
+  //   return '#ccc';
+  // };
   const legendItems = [
-    { range: '> 20', color: '#800026' },
-    { range: '10 - 20', color: '#BD0026' },
-    { range: '5 - 10', color: '#E31A1C' },
-    { range: '2 - 5', color: '#FC4E2A' },
-    { range: '1 - 2', color: '#FD8D3C' },
-    { range: '0.3 - 1', color: '#FEB24C' },
-    { range: '0 - 0.3', color: '#FFEDA0' },
+    { range: '> 100', color: '#800026' },
+    { range: '80 - 100', color: '#BD0026' },
+    { range: '50 - 80', color: '#E31A1C' },
+    { range: '30 - 50', color: '#FC4E2A' },
+    { range: '10 - 30', color: '#FD8D3C' },
+    { range: '5 - 10', color: '#FEB24C' },
+    { range: '0 - 5', color: '#FFEDA0' },
     { range: '無資料', color: '#ccc' },
   ];
 
